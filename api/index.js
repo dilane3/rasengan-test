@@ -51,13 +51,19 @@ export default function handler(req, res) {
                 case 0:
                     __filename = fileURLToPath(import.meta.url);
                     __dirname = dirname(__filename);
-                    console.log({ __dirname: __dirname });
+                    console.log({ 
+                        __dirname: __dirname,
+                        
+                    });
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 9, , 10]);
                     url = req.url;
                     host = req.headers.host;
                     appPath = join(__dirname, "..");
+                    console.log({
+                        dir: fsSync.readdir(appPath)
+                    })
                     if (!(url === "/robots.txt")) return [3 /*break*/, 5];
                     _b.label = 2;
                 case 2:
