@@ -61,8 +61,13 @@ export default function handler(req, res) {
                     url = req.url;
                     host = req.headers.host;
                     appPath = join(__dirname, "..");
-                    console.log({
-                        dir: fsSync.readdir(appPath)
+                    fsSync.readdir(appPath, (err, data) => {
+                        if (err) throw err;
+                        console.log(data);
+                    })
+                     fsSync.readdir(join(appPath, ".."), (err, data) => {
+                        if (err) throw err;
+                        console.log(data);
                     })
                     if (!(url === "/robots.txt")) return [3 /*break*/, 5];
                     _b.label = 2;
