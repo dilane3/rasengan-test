@@ -16,7 +16,7 @@
   from = "/assets/*"
   to = "/client/assets/:splat"
   status = 200
-  conditions = { Path = "/assets/*" }
+  conditions = { Path = "/assets/*.(png|jpg|gif|mp4)" }
 
 # We have to tell the Netlify that this URL will be served by the books.js function.
 [[redirects]]
