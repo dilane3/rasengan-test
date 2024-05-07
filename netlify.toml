@@ -14,7 +14,7 @@
 
 [[redirects]]
   from = "/assets/*"
-  to = "/assets/:splat"
+  to = "/client/assets/:splat"
   status = 200
   conditions = { Path = "/assets/*" }
 
