@@ -42,7 +42,7 @@ import { createStaticHandler, createStaticRouter, } from "react-router-dom/serve
 // @ts-ignore
 import { createFetchRequest } from "rasengan";
 export default (function (req, context) { return __awaiter(void 0, void 0, void 0, function () {
-    var __filename, __dirname, url, host, appPath, err_1, file, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler, fetchRequest, context_1, status_1, redirect, helmetContext, router, rendered, html, e_1;
+    var __filename, __dirname, url, host, appPath, err_1, filePath, file, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler, fetchRequest, context_1, status_1, redirect, helmetContext, router, rendered, html, e_1;
     var _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -75,8 +75,9 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                 if (url === "/manifest.json") {
                     return [2 /*return*/, new Response(path.resolve(join(appPath, "dist/client/manifest.json")))];
                 }
-                if (!(url.endsWith(".js") || url.endsWith(".css"))) return [3 /*break*/, 7];
-                return [4 /*yield*/, fs.readFile(url, "utf-8")];
+                if (!url.includes("/assets")) return [3 /*break*/, 7];
+                filePath = join(appPath, "dist/client", url);
+                return [4 /*yield*/, fs.readFile(filePath, "utf-8")];
             case 6:
                 file = _b.sent();
                 return [2 /*return*/, new Response(file, {
