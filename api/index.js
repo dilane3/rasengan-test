@@ -45,7 +45,7 @@ import { createFetchRequest } from "rasengan";
 export default function handler(req, res) {
     var _a;
     return __awaiter(this, void 0, void 0, function () {
-        var __filename, __dirname, url, host, appPath, err_1, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler_1, fetchRequest, context, status_1, redirect, helmetContext, router, rendered, html, e_1;
+        var __filename, __dirname, url, host, appPath, err_1, file, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler_1, fetchRequest, context, status_1, redirect, helmetContext, router, rendered, html, e_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -54,20 +54,10 @@ export default function handler(req, res) {
                     console.log({ __dirname: __dirname });
                     _b.label = 1;
                 case 1:
-                    _b.trys.push([1, 9, , 10]);
+                    _b.trys.push([1, 11, , 12]);
                     url = req.url;
                     host = req.headers.host;
                     appPath = process.cwd();
-                    console.log({
-                        cwd: process.cwd(),
-                        __dirname: __dirname
-                    });
-                    // read dir
-                    console.log({
-                        readdir: fsSync.readdirSync(__dirname),
-                        readdir2: fsSync.readdirSync(join(process.cwd())),
-                        readdir3: fsSync.readdirSync(join(process.cwd(), "..")),
-                    });
                     if (!(url === "/robots.txt")) return [3 /*break*/, 5];
                     _b.label = 2;
                 case 2:
@@ -88,11 +78,21 @@ export default function handler(req, res) {
                     if (url === "/manifest.json") {
                         return [2 /*return*/, res.send(path.resolve(join(appPath, "dist/client/manifest.json")))];
                     }
+                    if (!(url.endsWith(".js") || url.endsWith(".css"))) return [3 /*break*/, 7];
+                    return [4 /*yield*/, fs.readFile(url, "utf-8")];
+                case 6:
+                    file = _b.sent();
+                    return [2 /*return*/, new Response(file, {
+                            headers: {
+                                "Content-Type": url.endsWith(".js") ? "text/javascript" : "text/css",
+                            },
+                        })];
+                case 7:
                     templateHtml = "";
                     serverFilePath = join(appPath, "dist/server/entry-server.js");
                     bootstrapDirPath = join(appPath, "dist/client/assets");
                     return [4 /*yield*/, import(serverFilePath)];
-                case 6:
+                case 8:
                     entry = _b.sent();
                     bootstrap = "/assets/" +
                         fsSync
@@ -106,7 +106,7 @@ export default function handler(req, res) {
                     handler_1 = createStaticHandler(staticRoutes);
                     fetchRequest = createFetchRequest(req, host);
                     return [4 /*yield*/, handler_1.query(fetchRequest)];
-                case 7:
+                case 9:
                     context = _b.sent();
                     status_1 = context.status;
                     if (status_1 === 302) {
@@ -117,7 +117,7 @@ export default function handler(req, res) {
                     helmetContext = {};
                     router = createStaticRouter(handler_1.dataRoutes, context);
                     return [4 /*yield*/, render(router, context, helmetContext)];
-                case 8:
+                case 10:
                     rendered = _b.sent();
                     // Load template html
                     if (!templateHtml) {
@@ -130,12 +130,12 @@ export default function handler(req, res) {
                             .setHeader("Content-Type", "text/html")
                             .setHeader("Cache-Control", "max-age=31536000")
                             .end(html)];
-                case 9:
+                case 11:
                     e_1 = _b.sent();
                     console.log(e_1.stack);
                     res.status(500).end(e_1.stack);
-                    return [3 /*break*/, 10];
-                case 10: return [2 /*return*/];
+                    return [3 /*break*/, 12];
+                case 12: return [2 /*return*/];
             }
         });
     });

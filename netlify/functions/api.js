@@ -42,26 +42,16 @@ import { createStaticHandler, createStaticRouter, } from "react-router-dom/serve
 // @ts-ignore
 import { createFetchRequest } from "rasengan";
 export default (function (req, context) { return __awaiter(void 0, void 0, void 0, function () {
-    var __filename, __dirname, url, host, appPath, err_1, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler, fetchRequest, context_1, status_1, redirect, helmetContext, router, rendered, html, e_1;
+    var __filename, __dirname, url, host, appPath, err_1, file, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler, fetchRequest, context_1, status_1, redirect, helmetContext, router, rendered, html, e_1;
     var _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 __filename = fileURLToPath(import.meta.url);
                 __dirname = dirname(__filename);
-                console.log({
-                    cwd: process.cwd(),
-                    __dirname: __dirname
-                });
-                // read dir
-                console.log({
-                    readdir: fsSync.readdirSync(__dirname),
-                    readdir2: fsSync.readdirSync(join(process.cwd())),
-                    readdir3: fsSync.readdirSync(join(process.cwd(), "..")),
-                });
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 9, , 10]);
+                _b.trys.push([1, 11, , 12]);
                 url = req.url;
                 host = req.headers.get("host");
                 appPath = process.cwd();
@@ -85,11 +75,21 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                 if (url === "/manifest.json") {
                     return [2 /*return*/, new Response(path.resolve(join(appPath, "dist/client/manifest.json")))];
                 }
+                if (!(url.endsWith(".js") || url.endsWith(".css"))) return [3 /*break*/, 7];
+                return [4 /*yield*/, fs.readFile(url, "utf-8")];
+            case 6:
+                file = _b.sent();
+                return [2 /*return*/, new Response(file, {
+                        headers: {
+                            "Content-Type": url.endsWith(".js") ? "text/javascript" : "text/css",
+                        },
+                    })];
+            case 7:
                 templateHtml = "";
                 serverFilePath = join(appPath, "dist/server/entry-server.js");
                 bootstrapDirPath = join(appPath, "dist/client/assets");
                 return [4 /*yield*/, import(serverFilePath)];
-            case 6:
+            case 8:
                 entry = _b.sent();
                 bootstrap = "/assets/" +
                     fsSync
@@ -103,7 +103,7 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                 handler = createStaticHandler(staticRoutes);
                 fetchRequest = createFetchRequest(req, host);
                 return [4 /*yield*/, handler.query(fetchRequest)];
-            case 7:
+            case 9:
                 context_1 = _b.sent();
                 status_1 = context_1.status;
                 if (status_1 === 302) {
@@ -115,7 +115,7 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                 helmetContext = {};
                 router = createStaticRouter(handler.dataRoutes, context_1);
                 return [4 /*yield*/, render(router, context_1, helmetContext)];
-            case 8:
+            case 10:
                 rendered = _b.sent();
                 // Load template html
                 if (!templateHtml) {
@@ -130,13 +130,13 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                             "Cache-Control": "max-age=31536000",
                         },
                     })];
-            case 9:
+            case 11:
                 e_1 = _b.sent();
                 console.log(e_1.stack);
                 return [2 /*return*/, new Response(e_1.stack, {
                         status: 500,
                     })];
-            case 10: return [2 /*return*/];
+            case 12: return [2 /*return*/];
         }
     });
 }); });

@@ -23,3 +23,4 @@
   from = "/*"
   to = "/.netlify/functions/api"
   status = 200
+  # Add condition to avoid .js and .css files

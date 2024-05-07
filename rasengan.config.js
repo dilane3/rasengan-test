@@ -8,7 +8,7 @@ export default defineConfig({
       // open: true
     },
     production: {
-      hosting: "vercel"
+      hosting: "netlify"
     }
   },
 
