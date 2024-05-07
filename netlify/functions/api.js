@@ -64,7 +64,7 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                 _b.trys.push([1, 9, , 10]);
                 url = req.url;
                 host = req.headers.get("host");
-                appPath = join(__dirname, "..");
+                appPath = process.cwd();
                 if (!(url === "/robots.txt")) return [3 /*break*/, 5];
                 _b.label = 2;
             case 2:
