@@ -73,25 +73,25 @@ export default function handler(req, res) {
                     _b.label = 2;
                 case 2:
                     _b.trys.push([2, 4, , 5]);
-                    return [4 /*yield*/, fs.access(path.resolve(join(appPath, "dist/client/robots.txt")))];
+                    return [4 /*yield*/, fs.access(path.resolve(join(appPath, "client/robots.txt")))];
                 case 3:
                     _b.sent();
-                    return [2 /*return*/, res.send(path.resolve(join(appPath, "dist/client/robots.txt")))];
+                    return [2 /*return*/, res.send(path.resolve(join(appPath, "client/robots.txt")))];
                 case 4:
                     err_1 = _b.sent();
                     return [2 /*return*/, res.send("\n        user-agent: *\n        disallow: /downloads/\n        disallow: /private/\n        allow: /\n        \n        user-agent: magicsearchbot\n        disallow: /uploads/\n      ")];
                 case 5:
                     // ! Sitemap Fix
                     if (url === "/sitemap.xml") {
-                        return [2 /*return*/, res.send(path.resolve(join(appPath, "dist/client/sitemap.xml")))];
+                        return [2 /*return*/, res.send(path.resolve(join(appPath, "client/sitemap.xml")))];
                     }
                     // ! Manifest Fix
                     if (url === "/manifest.json") {
-                        return [2 /*return*/, res.send(path.resolve(join(appPath, "dist/client/manifest.json")))];
+                        return [2 /*return*/, res.send(path.resolve(join(appPath, "client/manifest.json")))];
                     }
                     templateHtml = "";
-                    serverFilePath = join(appPath, "dist/server/entry-server.js");
-                    bootstrapDirPath = join(appPath, "dist/client/assets");
+                    serverFilePath = join(appPath, "server/entry-server.js");
+                    bootstrapDirPath = join(appPath, "client/assets");
                     return [4 /*yield*/, import(serverFilePath)];
                 case 6:
                     entry = _b.sent();
@@ -101,7 +101,7 @@ export default function handler(req, res) {
                             .filter(function (fn) { return fn.includes("entry-client") && fn.endsWith(".js"); })[0];
                     styles = "/assets/" +
                         fsSync
-                            .readdirSync(join(appPath, "dist/client/assets"))
+                            .readdirSync(join(appPath, "client/assets"))
                             .filter(function (fn) { return fn.includes("entry-client") && fn.endsWith(".css"); })[0];
                     render = entry.render, staticRoutes = entry.staticRoutes, loadTemplateHtml = entry.loadTemplateHtml;
                     handler_1 = createStaticHandler(staticRoutes);
