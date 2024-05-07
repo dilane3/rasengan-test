@@ -2092,10 +2092,10 @@ range-parser@~1.2.1:
   resolved "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-rasengan@^1.0.0-beta.26:
-  version "1.0.0-beta.26"
-  resolved "https://registry.npmjs.org/rasengan/-/rasengan-1.0.0-beta.26.tgz"
-  integrity sha512-MEHV70dlmrx0uy8oyxFMHf4sWq6hCUX76GbM9KLsrDVLcO+wXraovweWM7GtlejLeZAETkHeRhoLdk+JtdW7Dg==
+rasengan@^1.0.0-beta.27:
+  version "1.0.0-beta.27"
+  resolved "https://registry.npmjs.org/rasengan/-/rasengan-1.0.0-beta.27.tgz"
+  integrity sha512-IlyQnkSEf8h9rttZY/bX+hVNPjbxLQiig7Ar+JwE8DUpAjx5cDfb77p1DaP75mXIYbnDiZum7cPRcIaqlnmANQ==
   dependencies:
     "@vercel/node" "^3.0.14"
     "@vitejs/plugin-react" "^4.2.1"

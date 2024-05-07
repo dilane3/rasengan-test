@@ -34,6 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 import fs from "node:fs/promises";
 import fsSync from "node:fs";
 import path, { join, dirname } from "node:path";
@@ -42,7 +51,7 @@ import { createStaticHandler, createStaticRouter, } from "react-router-dom/serve
 // @ts-ignore
 import { createFetchRequest } from "rasengan";
 export default (function (req, context) { return __awaiter(void 0, void 0, void 0, function () {
-    var __filename, __dirname, url, host, appPath, err_1, filePath, file, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler, fetchRequest, context_1, status_1, redirect, helmetContext, router, rendered, html, e_1;
+    var __filename, __dirname, url, host, appPath, err_1, segments, segmentsWithoutOrigin, _i, segments_1, segment, filePath, file, templateHtml, serverFilePath, bootstrapDirPath, entry, bootstrap, styles, render, staticRoutes, loadTemplateHtml, handler, fetchRequest, context_1, status_1, redirect, helmetContext, router, rendered, html, e_1;
     var _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -76,7 +85,16 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                     return [2 /*return*/, new Response(path.resolve(join(appPath, "dist/client/manifest.json")))];
                 }
                 if (!url.includes("/assets")) return [3 /*break*/, 7];
-                filePath = join(appPath, "dist/client", url);
+                segments = url.split("/");
+                segmentsWithoutOrigin = __spreadArray([], segments, true);
+                for (_i = 0, segments_1 = segments; _i < segments_1.length; _i++) {
+                    segment = segments_1[_i];
+                    if (segment === "assets") {
+                        break;
+                    }
+                    segmentsWithoutOrigin.shift();
+                }
+                filePath = join(appPath, "dist/client", segmentsWithoutOrigin.join("/"));
                 return [4 /*yield*/, fs.readFile(filePath, "utf-8")];
             case 6:
                 file = _b.sent();
