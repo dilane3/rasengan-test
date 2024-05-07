@@ -49,26 +49,22 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
             case 0:
                 __filename = fileURLToPath(import.meta.url);
                 __dirname = dirname(__filename);
-                
+                console.log({
+                    cwd: process.cwd(),
+                    __dirname: __dirname
+                });
+                // read dir
+                console.log({
+                    readdir: fsSync.readdirSync(__dirname),
+                    readdir2: fsSync.readdirSync(join(process.cwd())),
+                    readdir3: fsSync.readdirSync(join(process.cwd(), "..")),
+                });
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 9, , 10]);
                 url = req.url;
                 host = req.headers.get("host");
                 appPath = process.cwd();
-
-                console.log({
-                    cwd1: appPath,
-                    __dirname: __dirname
-                });
-                // read dir
-                console.log({
-                    path1: appPath,
-                    readdir2: fsSync.readdirSync(join(appPath)),
-                    path2: join(appPath, ".."),
-                    readdir3: fsSync.readdirSync(join(appPath, "..")),
-                });
-                
                 if (!(url === "/robots.txt")) return [3 /*break*/, 5];
                 _b.label = 2;
             case 2:
