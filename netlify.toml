@@ -16,11 +16,9 @@
   from = "/assets/*"
   to = "/client/assets/:splat"
   status = 200
-  conditions = { Path = "/assets/*.(png|jpg|gif|mp4)" }
 
 # We have to tell the Netlify that this URL will be served by the books.js function.
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api"
   status = 200
-  # Add condition to avoid .js and .css files
