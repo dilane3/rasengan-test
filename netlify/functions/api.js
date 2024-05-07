@@ -55,9 +55,8 @@ export default (function (req, context) { return __awaiter(void 0, void 0, void 
                 });
                 // read dir
                 console.log({
-                    readdir: fsSync.readdirSync(__dirname),
-                    readdir2: fsSync.readdirSync(join(process.cwd(), "..")),
-                    readdir3: fsSync.readdirSync(join(process.cwd(), "..", "..")),
+                    readdir2: fsSync.readdirSync(join(process.cwd())),
+                    readdir3: fsSync.readdirSync(join(process.cwd(), "..")),
                 });
                 _b.label = 1;
             case 1:
